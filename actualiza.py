@@ -20,10 +20,10 @@ if(metodo == "POST"):
     r = datos.getvalue("role")
     con = mysql.connector.connect(user='root',password='', host='127.0.0.1', database='foro')
     cursor =  con.cursor()
-    sql = "INSERT INTO users VALUES ('{}',sha1('{}'),'{}','{}','{}')".format(e,p,n,a,r)
+    sql = "UPDATE users SET password=sha1('{}'),name='{}',avatar='{}',role='{}' WHERE email ='{}'".format(p,n,a,r,e)
     cursor.execute(sql)
     con.commit()
     con.close()
-    print("<h2>Usuario Agregado</h2>")
+    print("<h2>Usuario Actualizado</h2>")
 else:
     print("<h2>Metodo no permitido</h2>")

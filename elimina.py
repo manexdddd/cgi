@@ -14,16 +14,13 @@ metodo = os.environ["REQUEST_METHOD"]
 if(metodo == "POST"):
     datos = cgi.FieldStorage()
     e = datos.getvalue("email")
-    p = datos.getvalue("password")
-    n = datos.getvalue("name")
-    a = datos.getvalue("avatar")
-    r = datos.getvalue("role")
+    
     con = mysql.connector.connect(user='root',password='', host='127.0.0.1', database='foro')
     cursor =  con.cursor()
-    sql = "INSERT INTO users VALUES ('{}',sha1('{}'),'{}','{}','{}')".format(e,p,n,a,r)
+    sql = f"DELETE from users  WHERE email='{e}'"
     cursor.execute(sql)
     con.commit()
     con.close()
-    print("<h2>Usuario Agregado</h2>")
+    print("<h2>Usuario eliminado</h2>")
 else:
     print("<h2>Metodo no permitido</h2>")
